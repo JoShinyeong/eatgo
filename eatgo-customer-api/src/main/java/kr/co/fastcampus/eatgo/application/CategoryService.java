@@ -18,6 +18,7 @@ public class CategoryService {
 
     @Autowired
     public CategoryService(CategoryRepository categoryRepository){
+
         this.categoryRepository=categoryRepository;
     }
 
@@ -26,15 +27,6 @@ public class CategoryService {
         return categories;
     }
 
-    public Category addCategory(String name) {
-
-        Category category = Category.builder().name(name).build();
-
-        categoryRepository.save(category);
-
-        return category;
-
-    }
 
 
 
