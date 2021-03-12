@@ -114,7 +114,7 @@ public class RestaurantServiceTest {
         given(restaurantRepository.findById(1004L))
                 .willReturn(Optional.of(restaurant));
 
-        Restaurant updated = restaurantService.updateRestaurant(1004L, "Sool zip", "Busan");
+        Restaurant updated = restaurantService.updateRestaurant(1004L,1L ,"Sool zip", "Busan");
 
         assertThat(updated.getName(), is("Sool zip"));
         assertThat(updated.getAddress(), is("Busan"));
