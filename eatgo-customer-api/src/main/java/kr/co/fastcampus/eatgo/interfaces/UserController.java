@@ -18,13 +18,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
-    public List<User> list() {
-        List<User> users = userService.getUsers();
-
-        return users;
-    }
-
 
     @PostMapping("/users")
     public ResponseEntity<?> create(
@@ -32,35 +25,14 @@ public class UserController {
     ) throws URISyntaxException {
         String email = resource.getEmail();
         String name = resource.getName();
+        String password = resource.getPassword();
 
-        User user = userService.addUser(email, name);
+        User user = userService.registerUser(email, name, password);
 
         String url = "/users/" + user.getId();
 
         return ResponseEntity.created(new URI(url)).body("{}");
-    }
 
-
-    @PatchMapping("/users/{id}")
-    public String update(
-            @PathVariable("id") Long id,
-            @RequestBody User resource
-    ){
-        String email = resource.getEmail();
-        String name = resource.getName();
-        Long level = resource.getLevel();
-
-        userService.updateUser(id, email, name, level);
-
-        return "{}";
-
-    }
-
-    @DeleteMapping("/users/{id}")
-    public String delete(@PathVariable("id") Long id){
-        userService.deactiveUser(id);
-
-        return "{}";
     }
 
 }

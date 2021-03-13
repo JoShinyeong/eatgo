@@ -19,7 +19,7 @@ public class UserService {
     }
 
     public List<User> getUsers(){
-        List<User> users = userRepository.findALl();
+        List<User> users = userRepository.findAll();
 
         return users;
     }
@@ -35,5 +35,26 @@ public class UserService {
     }
 
 
-    //TODO : update&deactive
+    public User updateUser(Long id, String email, String name, Long level){
+        // TODO: restaurantService의 예외 처리 참고.
+
+        User user = userRepository.findById(id).orElse(null);
+
+        user.setEmail(email);
+        user.setName(name);
+        user.setLevel(level);
+
+        return user;
+    }
+
+    public User deactiveUser(Long id){
+        // TODO: restaurantService의 예외 처리 참고.
+
+        User user = userRepository.findById(id).orElse(null);
+
+        user.deativate();
+
+        return user;
+    }
+
 }
