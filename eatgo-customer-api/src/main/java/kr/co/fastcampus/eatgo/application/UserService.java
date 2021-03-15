@@ -46,4 +46,8 @@ public class UserService {
 
     }
 
+    public User autthenticate(String email, String password) {
+    return null;
+
+    }
 }
