@@ -33,7 +33,7 @@ public class ReviewServiceTests {
                 .description("Mot-it-da")
                 .build();
         
-    reviewService.addReview(1004L,review);
+    reviewService.addReview(1004L,"ABC", 3, "Mat-it-da");
 
     verify(reviewRepository).save(any());
 

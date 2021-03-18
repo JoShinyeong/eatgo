@@ -32,14 +32,14 @@ public class JwtUtilTests {
     }
 
     @Test
-    public void getCalims(){
+    public void getClaims(){
         String token = "eyJhbGciOiJIUzI1NiJ9." +
                 "eyJ1c2VySWQiOjEwMDQsIm5hbWUiOiJKb2huIn0." +
                 "8hm6ZOJykSINHxL-rf0yV882fApL3hyQ9-WGlJUyo2A";
 
-        Claims clamis = jwtUtil.getClamis(token);
+        Claims claims = jwtUtil.getClaims(token);
 
-        assertThat(clamis.get("userId", Long.class), is(1004L));
+        assertThat(claims.get("userId", Long.class), is(1004L));
     }
 
 }
