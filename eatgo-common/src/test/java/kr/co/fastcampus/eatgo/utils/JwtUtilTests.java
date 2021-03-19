@@ -25,7 +25,7 @@ public class JwtUtilTests {
     public void createToken(){
 
 
-        String token = jwtUtil.createToken(1004L, "John");
+        String token = jwtUtil.createToken(1004L, "John", null);
 
         assertThat(token, containsString("."));
 
@@ -40,6 +40,7 @@ public class JwtUtilTests {
         Claims claims = jwtUtil.getClaims(token);
 
         assertThat(claims.get("userId", Long.class), is(1004L));
+        assertThat(claims.get("name"), is("John"));
     }
 
 }

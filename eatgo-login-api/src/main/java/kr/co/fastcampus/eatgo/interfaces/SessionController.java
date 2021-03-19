@@ -1,7 +1,6 @@
 package kr.co.fastcampus.eatgo.interfaces;
 
 
-import kr.co.fastcampus.eatgo.application.SessionResponseDto;
 import kr.co.fastcampus.eatgo.application.UserService;
 import kr.co.fastcampus.eatgo.domain.User;
 import kr.co.fastcampus.eatgo.utils.JwtUtil;
@@ -28,17 +27,17 @@ public class SessionController {
     public ResponseEntity<SessionResponseDto> create(
             @RequestBody SessionRequestDto resource
     ) throws URISyntaxException {
-
-
         String email = resource.getEmail();
         String password = resource.getPassword();
+
         User user = userService.authenticate(email, password);
 
         String accessToken = jwtUtil.createToken(
                 user.getId(),
-                user.getName()
+                user.getName(),
+                user.isRestaurantOwner() ? user.getRestaurantId(): null);
 
-        );
+
 
         String url = "/session";
         return ResponseEntity.created(new URI(url)).body
