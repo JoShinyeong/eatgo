@@ -18,20 +18,18 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
-
     @GetMapping("/reservations")
-    public List<Reservation> list(Authentication authentication) {
-
+    public List<Reservation> list(
+            Authentication authentication
+    ) {
         Claims claims = (Claims) authentication.getPrincipal();
 
         Long restaurantId = claims.get("restaurantId", Long.class);
 
-        List<Reservation> reservations = reservationService.getReservations(restaurantId);
+        List<Reservation> reservations =
+                reservationService.getReservations(restaurantId);
 
         return reservations;
-
-
     }
-
 
 }

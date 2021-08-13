@@ -14,7 +14,6 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @RunWith(SpringRunner.class)
 @WebMvcTest(ReservationController.class)
 public class ReservationControllerTests {
@@ -26,13 +25,15 @@ public class ReservationControllerTests {
 
     @Test
     public void list() throws Exception {
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIwMjAsIm5hbWUiOiJPd25lciIsInJlc3RhdXJhbnRJZCI6MTAwNH0.a5n4PWJ2-3yVyMaLGG0HSPXtH_mgpOvofpQ1OFkgDOQ";
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIsIm5hbWUiOiLqsIDqsowg7KO87J24IiwicmVzdGF1cmFudElkIjoxfQ.YMR6Dhg0C8cGVop98wMFRtgOdvsYclIQZQlvPpMwcOQ";
 
         mvc.perform(get("/reservations")
                 .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk());
 
-        verify(reservationService).getReservations(1004L);
+        verify(reservationService).getReservations(1L);
     }
 
 }
+
+//"Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIsIm5hbWUiOiLqsIDqsowg7KO87J24IiwicmVzdGF1cmFudElkIjoxfQ.YMR6Dhg0C8cGVop98wMFRtgOdvsYclIQZQlvPpMwcOQ"

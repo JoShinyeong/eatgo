@@ -25,7 +25,7 @@ public class UserServiceTests {
     private UserService userService;
 
     @Mock
-    private UserRepository userRepository;
+    private UserRepository userRepostory;
 
     @Mock
     private PasswordEncoder passwordEncoder;
@@ -35,7 +35,7 @@ public class UserServiceTests {
 
         MockitoAnnotations.initMocks(this);
 
-        userService = new UserService(userRepository,passwordEncoder);
+        userService = new UserService(userRepostory,passwordEncoder);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class UserServiceTests {
 
         User mockUser = User.builder().email(email).build();
 
-        given(userRepository.findByEmail(email)).willReturn(Optional.of(mockUser));
+        given(userRepostory.findByEmail(email)).willReturn(Optional.of(mockUser));
 
         given(passwordEncoder.matches(any(), any())).willReturn(true);
 
@@ -61,7 +61,7 @@ public class UserServiceTests {
         String email = "x@example.com";
         String password = "test";
 
-        given(userRepository.findByEmail(email)).willReturn(Optional.empty());
+        given(userRepostory.findByEmail(email)).willReturn(Optional.empty());
 
 
 
@@ -77,7 +77,7 @@ public class UserServiceTests {
 
         User mockUser = User.builder().email(email).build();
 
-        given(userRepository.findByEmail(email)).willReturn(Optional.of(mockUser));
+        given(userRepostory.findByEmail(email)).willReturn(Optional.of(mockUser));
 
         given(passwordEncoder.matches(any(), any())).willReturn(false);
 

@@ -6,40 +6,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserService {
 
     private UserRepository userRepository;
 
-  private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserService(UserRepository userRepository,
-                      PasswordEncoder passwordEncoder ) {
+                       PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-
-
     }
 
-
     public User authenticate(String email, String password) {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new EmailNotExistedException(email
-        ));
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new EmailNotExistedException(email));
 
-
-
-        if(!passwordEncoder.matches(password, user.getPassword())){
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new PasswordWrongException();
-
         }
 
         return user;
-
     }
+
 
 }

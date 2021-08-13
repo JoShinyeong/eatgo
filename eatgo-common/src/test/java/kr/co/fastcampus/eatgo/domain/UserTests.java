@@ -38,7 +38,11 @@ public class UserTests {
         assertThat(user.isRestaurantOwner(), is(true));
         assertThat(user.getRestaurantId(), is(1004L));
     }
-
-
+//    @Test
+//    public void accessToken(){
+//        User user = User.builder().password("ACCESSTOKEN").build();
+//
+//        assertThat(user.getAccessToken(), is("ACCESSTOKE"));
+//    }
 
 }

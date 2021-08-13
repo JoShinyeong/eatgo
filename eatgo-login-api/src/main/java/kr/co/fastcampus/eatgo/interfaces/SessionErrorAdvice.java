@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class SessionErrorAdvice {
 
 
-
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(PasswordWrongException.class)

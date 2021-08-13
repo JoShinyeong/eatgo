@@ -37,21 +37,21 @@ public class UserControllerTests {
     public void create() throws Exception {
         User mockUser = User.builder()
                 .id(1004L)
-                .email("tester@exmaple.com")
+                .email("tester@example.com")
                 .name("Tester")
                 .password("test")
                 .build();
-        given(userService.registerUser("tester@exmaple.com", "Tester", "test"))
+        given(userService.registerUser("tester@example.com", "Tester", "test"))
                 .willReturn(mockUser);
 
         mvc.perform(post("/users")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"email\":\"tester@exmaple.com\",\"name\":\"Tester\",\"password\":\"test\"}"))
+                .content("{\"email\":\"tester@example.com\",\"name\":\"Tester\",\"password\":\"test\"}"))
                 .andExpect(status().isCreated())
                 .andExpect(header().string("location", "/users/1004"));
 
 
-        verify(userService).registerUser("tester@exmaple.com", "Tester", "test");
+        verify(userService).registerUser("tester@example.com", "Tester", "test");
 
 
     }

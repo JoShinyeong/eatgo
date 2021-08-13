@@ -29,12 +29,10 @@ public class JwtUtil {
                 .compact();
     }
 
-
-    public Claims getClaims(String token){
+    public Claims getClaims(String token) {
         return Jwts.parser()
                 .setSigningKey(key)
                 .parseClaimsJws(token)
                 .getBody();
     }
-
 }

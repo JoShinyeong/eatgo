@@ -16,17 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
-
     private JwtUtil jwtUtil;
 
     public JwtAuthenticationFilter(
-            AuthenticationManager authenticationManager
-            , JwtUtil jwtUtil) {
-
+            AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         super(authenticationManager);
         this.jwtUtil = jwtUtil;
     }
 
+    @Override
     protected void doFilterInternal(
             HttpServletRequest request,
             HttpServletResponse response,
@@ -34,16 +32,14 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
     ) throws IOException, ServletException {
         Authentication authentication = getAuthentication(request);
 
-
         if (authentication != null) {
             SecurityContext context = SecurityContextHolder.getContext();
             context.setAuthentication(authentication);
         }
 
         chain.doFilter(request, response);
-
-
     }
+
     private Authentication getAuthentication(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
         if (token == null) {
@@ -55,7 +51,5 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
         Authentication authentication =
                 new UsernamePasswordAuthenticationToken(claims, null);
         return authentication;
-    }
-
-}
+    }}
 
